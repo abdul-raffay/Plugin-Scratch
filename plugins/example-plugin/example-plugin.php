@@ -45,14 +45,24 @@ add_action('admin_menu', 'site_script_plugin');
     // Callback Function
 function header_footer_function_page(){
 
-
     if(isset($_POST['update_scripts'])){
-        // Retrieve Value from dB, 
-            // if there is no value then the second argument is called which is to be default value
-        $header_scripts = get_option('header_scripts', '');
-        $footer_scripts = get_option('footer_scripts', '');
+        update_option('header_scripts', $_POST['header']);
+        update_option('footer_scripts', $_POST['footer']);
+        ?>
 
+        <!-- WP Default Classes -->
+        <div id="setting-error-settings-updated" class="updated settings-error notice is-dismissible">
+            <h5>Scripts has been updated</h5>
+        </div>
+
+        <?php
     }
+
+    // Retrieve Value from dB, 
+        // if there is no value then the second argument is called which is to be default value
+    $header_scripts = get_option('header_scripts', '');
+    $footer_scripts = get_option('footer_scripts', '');
+
 ?>
     <!-- // Html here -->
     <div class="wrap">   <!-- Default Page Wrap Class by WP -->

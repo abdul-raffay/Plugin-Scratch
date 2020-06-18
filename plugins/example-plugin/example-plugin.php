@@ -42,7 +42,9 @@ function site_script_plugin(){
     );
 }
 add_action('admin_menu', 'site_script_plugin');
-    // Callback Function
+
+
+// Callback Function for 'add_menu_page' function in 'site_script_plugin'
 function header_footer_function_page(){
 
     if(isset($_POST['update_scripts'])){
@@ -87,5 +89,20 @@ function header_footer_function_page(){
 <?php 
 }
 
+// To show it in Header Tag => wp_head
+function header_scripts_function(){
+    $header_scripts = get_option('header_scripts', '');
+
+    echo $header_scripts;
+}
+add_action('wp_head', 'header_scripts_function');
+
+// To show it in Footer Tag => wp_footer
+function footer_scripts_function(){
+    $footer_scripts = get_option('footer_scripts', '');
+
+    echo $footer_scripts;
+}
+add_action('wp_footer', 'footer_scripts_function');
 
 ?>

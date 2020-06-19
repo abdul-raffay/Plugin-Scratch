@@ -664,3 +664,24 @@ require get_parent_theme_file_path( '/inc/customizer.php' );
  * SVG icons functions and filters.
  */
 require get_parent_theme_file_path( '/inc/icon-functions.php' );
+
+
+// Admin Bar Logic
+function Hide_Admin_Bar(){
+	if(current_user_can('administrator')){
+		show_admin_bar(true);
+	}
+	else{
+		show_admin_bar(false);
+	}
+}
+add_action('after_setup_theme', 'Hide_Admin_Bar');
+
+// Only Admin Can go to Dashboard
+function only_admin_dashboard() { 
+	if (is_admin() && !current_user_can( 'administrator' )) { 
+		wp_redirect(home_url()); 
+		exit; 
+	} 
+} 
+add_action('init', 'only_admin_dashboard'); 
